@@ -68,6 +68,12 @@ export const insightsAPI = {
   getProgress: () => api.get('/insights/progress'),
 };
 
+// Network API
+export const networkAPI = {
+  getSuggested: () => api.get('/network/suggested'),
+  search: (q) => api.get('/network/search', { params: { q } }),
+};
+
 // Health check
 export const healthCheck = () => api.get('/health');
 

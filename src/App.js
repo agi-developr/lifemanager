@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import ChatPage from './pages/ChatPage';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import Network from './pages/Network';
 import Login from './pages/Login';
 import './index.css';
 
@@ -99,6 +100,7 @@ function AppContent() {
                   <Route path="/chat/:module" element={<ChatPage />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route path="/network" element={<Network />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </div>

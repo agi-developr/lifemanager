@@ -55,6 +55,18 @@ function ChatPage() {
         description: 'Connect with like-minded individuals',
         icon: '👥',
         color: 'from-cyan-500 to-blue-500'
+      },
+      business: {
+        title: 'Business Builder',
+        description: 'Ideate, validate, and launch your business',
+        icon: '🏗️',
+        color: 'from-amber-600 to-orange-600'
+      },
+      networking: {
+        title: 'Networking Coach',
+        description: 'Grow authentic relationships that help you thrive',
+        icon: '🧩',
+        color: 'from-sky-500 to-indigo-500'
       }
     };
     

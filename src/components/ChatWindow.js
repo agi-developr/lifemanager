@@ -40,7 +40,9 @@ function ChatWindow({ module }) {
         career: "Hello! I'm here to help you plan your career! 🚀 What's your dream job?",
         events: "Hi! Let's find some great events for you! 📅 What type of events interest you most?",
         goals: "Welcome! Let's set and track your goals! 🎯 What's one thing you want to achieve this year?",
-        community: "Hello! Let's help you connect with like-minded people! 👥 What communities interest you?"
+        community: "Hello! Let's help you connect with like-minded people! 👥 What communities interest you?",
+        business: "Welcome to Business Builder! 🏗️ What's the problem you're solving and for whom?",
+        networking: "Welcome to Networking Coach! 🧩 Who do you want to connect with and why?"
       };
 
       const welcomeMessage = welcomeMessages[module] || "Hi! I'm your AI life coach. How can I help you today?";
@@ -98,6 +100,16 @@ function ChatWindow({ module }) {
           "That's fascinating! What specifically about that excites you? 🤔",
           "I can see your passion shining through! What would you do if money wasn't an issue? 💭",
           "That's a great insight! How do you feel when you're doing that activity? ✨"
+        ],
+        business: [
+          "Great! Who is your target customer and what top problem are you solving?",
+          "Nice idea. What is the simplest MVP you could ship in a week?",
+          "How would you validate demand with 5 conversations this week?"
+        ],
+        networking: [
+          "What is your networking goal this month (mentor, peers, clients, cofounder)?",
+          "Let's craft a 1–2 sentence intro. How would you describe yourself and what you seek?",
+          "Name 2 communities where your people hang out."
         ],
         strengths: [
           "That's a wonderful strength! How do you think you could leverage that more? 💪",

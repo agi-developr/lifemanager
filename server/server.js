@@ -41,6 +41,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/insights', require('./routes/insights'));
+app.use('/api/network', require('./routes/network'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

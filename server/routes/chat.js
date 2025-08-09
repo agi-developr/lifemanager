@@ -206,4 +206,28 @@ async function updateUserInsights(userId, insights) {
   }
 }
 
+// Test AI integration endpoint
+router.get('/test-ai', async (req, res) => {
+  try {
+    const testMessage = "Hello! I'm testing the AI integration. Can you help me discover my passions?";
+    const aiResponse = await aiService.generateResponse(testMessage, 'passions', {});
+    
+    res.json({
+      success: true,
+      message: 'AI integration test completed',
+      testMessage,
+      aiResponse: aiResponse.content,
+      insights: aiResponse.insights,
+      suggestions: aiResponse.suggestions
+    });
+  } catch (error) {
+    console.error('AI test error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'AI integration test failed',
+      message: error.message
+    });
+  }
+});
+
 module.exports = router; 

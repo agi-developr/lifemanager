@@ -4,10 +4,23 @@ class AIService {
   constructor() {
     this.openaiApiKey = process.env.OPENAI_API_KEY;
     this.baseURL = 'https://api.openai.com/v1';
+    
+    // Validate API key
+    if (!this.openaiApiKey) {
+      console.warn('⚠️  OPENAI_API_KEY not found in environment variables. AI features will use fallback responses.');
+    } else {
+      console.log('✅ OpenAI API key configured successfully');
+    }
   }
 
   async generateResponse(message, module, userContext = {}) {
     try {
+      // Check if API key is available
+      if (!this.openaiApiKey) {
+        console.log('Using fallback response - no API key configured');
+        return this.getFallbackResponse(module, message);
+      }
+
       const systemPrompt = this.buildSystemPrompt(module, userContext);
       const messages = this.buildMessageHistory(message, module);
       
@@ -43,6 +56,13 @@ class AIService {
     } catch (error) {
       console.error('AI API Error:', error.response?.data || error.message);
       
+      // Check if it's an authentication error
+      if (error.response?.status === 401) {
+        console.error('❌ Invalid OpenAI API key. Please check your OPENAI_API_KEY environment variable.');
+      } else if (error.response?.status === 429) {
+        console.error('❌ Rate limit exceeded. Please try again later.');
+      }
+      
       // Fallback responses if AI service is unavailable
       return this.getFallbackResponse(module, message);
     }
@@ -73,7 +93,9 @@ Guidelines:
       career: `Help explore career paths that align with their passions and skills. Consider both traditional and non-traditional paths. Ask about their ideal work environment and values.`,
       events: `Suggest relevant events, workshops, and networking opportunities. Consider their location, interests, and goals. Ask about their preferred event types and networking style.`,
       goals: `Help set SMART (Specific, Measurable, Achievable, Relevant, Time-bound) goals. Break down large goals into smaller steps. Ask about their timeline and potential obstacles.`,
-      community: `Help identify communities that align with their interests and values. Consider both online and offline communities. Ask about what they hope to give and receive from community involvement.`
+      community: `Help identify communities that align with their interests and values. Consider both online and offline communities. Ask about what they hope to give and receive from community involvement.`,
+      business: `Act as a startup cofounder helping the user ideate, validate, and plan a business. Clarify target customer, problem, solution, unique value, channels, and revenue model. Use lean canvas thinking. Drive toward: a) clear problem statement, b) top 3 customer segments, c) first testable offer (MVP), d) 3 validation experiments, e) next 7-day action plan.`,
+      networking: `Coach effective networking. Help the user clarify networking goal (mentor, cofounder, clients, peers), craft a short intro pitch, and identify 5 relevant communities or people to contact. Suggest polite outreach templates and next steps. Focus on authenticity and mutual value.`
     };
 
     return basePrompt + '\n\n' + (moduleSpecificPrompts[module] || '');
@@ -143,6 +165,47 @@ Guidelines:
             }))
           });
         }
+        break;
+      case 'business':
+        suggestions.push({
+          type: 'framework',
+          title: 'Lean Canvas Checklist',
+          description: 'Map your idea quickly with these sections',
+          items: [
+            { name: 'Problem → Top 3 pains' },
+            { name: 'Customer Segments → Who has the pains' },
+            { name: 'Unique Value Proposition → One-liner' },
+            { name: 'Solution → MVP scope' },
+            { name: 'Channels → Where to reach them' },
+            { name: 'Revenue Streams → How you get paid' }
+          ]
+        });
+        suggestions.push({
+          type: 'next_steps',
+          title: '7-Day Validation Plan',
+          description: 'Concrete actions to validate demand fast',
+          items: [
+            { name: 'Day 1: Interview 3 potential customers' },
+            { name: 'Day 2: Draft landing page one-liner' },
+            { name: 'Day 3: Share with 10 people for feedback' },
+            { name: 'Day 4: Create waitlist form' },
+            { name: 'Day 5: Outreach in 2 relevant communities' },
+            { name: 'Day 6: Analyze responses and refine offer' },
+            { name: 'Day 7: Decide go/no-go for MVP build' }
+          ]
+        });
+        break;
+      case 'networking':
+        suggestions.push({
+          type: 'template',
+          title: 'Outreach Templates',
+          description: 'Polite, concise messages to start a conversation',
+          items: [
+            { name: 'Peer intro', platform: 'DM', url: 'https://www.linkedin.com/' },
+            { name: 'Mentor ask', platform: 'Email', url: 'https://www.gmail.com/' },
+            { name: 'Cofounder post', platform: 'Community', url: 'https://discord.com/' }
+          ]
+        });
         break;
     }
 

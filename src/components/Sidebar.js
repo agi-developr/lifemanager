@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const modules = [
+  { name: 'Business', path: '/chat/business', icon: '🏗️', description: 'Create and validate ideas' },
+  { name: 'Networking', path: '/chat/networking', icon: '🧩', description: 'Grow your network' },
   { name: 'Passions', path: '/chat/passions', icon: '🔥', description: 'Discover what excites you' },
   { name: 'Strengths', path: '/chat/strengths', icon: '💪', description: 'Identify your unique abilities' },
   { name: 'Upskill', path: '/chat/upskill', icon: '📚', description: 'Learn new skills' },
@@ -89,6 +91,12 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
         {!collapsed && (
           <div className="absolute bottom-4 left-4 right-4">
             <div className="space-y-2">
+              <Link
+                to="/network"
+                className="block p-2 rounded-lg hover:bg-primary-700 text-primary-200 text-sm"
+              >
+                👥 People & Network
+              </Link>
               <Link
                 to="/dashboard"
                 className="block p-2 rounded-lg hover:bg-primary-700 text-primary-200 text-sm"

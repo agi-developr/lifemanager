@@ -25,7 +25,7 @@ const chatSessionSchema = new mongoose.Schema({
   },
   module: {
     type: String,
-    enum: ['passions', 'strengths', 'upskill', 'money', 'career', 'events', 'goals', 'community', 'general'],
+    enum: ['passions', 'strengths', 'upskill', 'money', 'career', 'events', 'goals', 'community', 'business', 'networking', 'general'],
     required: true
   },
   messages: [messageSchema],
