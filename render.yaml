@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: lifemanager-api
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        value: mongodb+srv://user1:ilia1100@cluster1.xb81tso.mongodb.net/lifemanager?retryWrites=true&w=majority&appName=Cluster1
+      - key: JWT_SECRET
+        value: lifemanager-super-secret-jwt-key-production-2024
+      - key: FRONTEND_URL
+        value: https://lifemanager-git-main-agi-developrs-projects.vercel.app
