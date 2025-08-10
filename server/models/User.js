@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
       required: true,
       trim: true
     },
+    avatar: {
+      type: String, // data URI or CDN URL
+      trim: true
+    },
     age: {
       type: Number,
       min: 13,

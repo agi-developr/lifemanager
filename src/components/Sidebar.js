@@ -1,17 +1,20 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const modules = [
-  { name: 'Business', path: '/chat/business', icon: '🏗️', description: 'Create and validate ideas' },
-  { name: 'Networking', path: '/chat/networking', icon: '🧩', description: 'Grow your network' },
-  { name: 'Passions', path: '/chat/passions', icon: '🔥', description: 'Discover what excites you' },
-  { name: 'Strengths', path: '/chat/strengths', icon: '💪', description: 'Identify your unique abilities' },
-  { name: 'Upskill', path: '/chat/upskill', icon: '📚', description: 'Learn new skills' },
-  { name: 'Money', path: '/chat/money', icon: '💰', description: 'Manage your finances' },
-  { name: 'Career', path: '/chat/career', icon: '🚀', description: 'Plan your career path' },
-  { name: 'Events', path: '/chat/events', icon: '📅', description: 'Find relevant events' },
-  { name: 'Goals', path: '/chat/goals', icon: '🎯', description: 'Set and track goals' },
-  { name: 'Community', path: '/chat/community', icon: '👥', description: 'Connect with others' }
+// Primary navigation for the collaboration + alignment platform
+const primaryNav = [
+  { name: 'Workspace', path: '/workspace', icon: '🧭', description: 'Your collaborative home' },
+  { name: 'Ideas', path: '/ideas', icon: '💡', description: 'Capture and evolve ideas' },
+  { name: 'Pipeline', path: '/pipeline', icon: '🛠️', description: 'Idea → business steps' },
+  { name: 'Matches', path: '/matches', icon: '🤝', description: 'Cofounder & idea alignment' },
+  { name: 'Tests', path: '/tests', icon: '🧪', description: 'Personality & skills' },
+  { name: 'Collaborators', path: '/collaborators', icon: '👥', description: 'People & roles' },
+];
+
+// Keep AI chat modules accessible as secondary shortcuts
+const aiShortcuts = [
+  { name: 'AI: Pipeline Coach', path: '/chat/business', icon: '🏗️', description: 'Validate and scope' },
+  { name: 'AI: Networking', path: '/chat/networking', icon: '🧩', description: 'Outreach & intros' },
 ];
 
 function Sidebar({ collapsed, onToggle, user, onLogout }) {
@@ -36,7 +39,7 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
         {!collapsed && (
           <div className="mt-6 mb-8">
             <h2 className="text-xl font-bold">LifeManager</h2>
-            <p className="text-primary-200 text-sm">Your AI Life Coach</p>
+            <p className="text-primary-200 text-sm">AI-assisted collaboration</p>
           </div>
         )}
 
@@ -44,11 +47,19 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
         {!collapsed && user && (
           <div className="mb-6 p-3 bg-primary-700 rounded-lg">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-medium">
-                  {user.profile?.name?.charAt(0) || 'U'}
-                </span>
-              </div>
+              {user.profile?.avatar ? (
+                <img
+                  src={user.profile.avatar}
+                  alt="Avatar"
+                  className="w-10 h-10 rounded-full object-cover border border-primary-600"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-medium">
+                    {user.profile?.name?.charAt(0) || 'U'}
+                  </span>
+                </div>
+              )}
               <div>
                 <p className="font-medium">{user.profile?.name || 'User'}</p>
                 <p className="text-primary-200 text-sm">
@@ -59,26 +70,26 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
           </div>
         )}
 
-        {/* Navigation Modules */}
+        {/* Primary Navigation */}
         <nav className="space-y-2">
-          {modules.map((module) => {
-            const isActive = location.pathname === module.path;
+          {primaryNav.map((item) => {
+            const isActive = location.pathname === item.path;
             return (
               <Link
-                key={module.name}
-                to={module.path}
+                key={item.name}
+                to={item.path}
                 className={`block p-3 rounded-lg transition-colors ${
-                  isActive 
-                    ? 'bg-primary-600 text-white shadow-lg' 
+                  isActive
+                    ? 'bg-primary-600 text-white shadow-lg'
                     : 'hover:bg-primary-700 text-primary-100'
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <span className="text-xl">{module.icon}</span>
+                  <span className="text-xl">{item.icon}</span>
                   {!collapsed && (
                     <div className="flex-1">
-                      <p className="font-medium">{module.name}</p>
-                      <p className="text-xs opacity-75">{module.description}</p>
+                      <p className="font-medium">{item.name}</p>
+                      <p className="text-xs opacity-75">{item.description}</p>
                     </div>
                   )}
                 </div>
@@ -86,6 +97,37 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
             );
           })}
         </nav>
+
+        {/* Secondary: AI Shortcuts */}
+        {!collapsed && (
+          <div className="mt-6">
+            <p className="px-2 mb-2 text-xs uppercase tracking-wider text-primary-300">AI Shortcuts</p>
+            <div className="space-y-2">
+              {aiShortcuts.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`block p-3 rounded-lg transition-colors ${
+                      isActive
+                        ? 'bg-primary-600 text-white shadow-lg'
+                        : 'hover:bg-primary-700 text-primary-100'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xl">{item.icon}</span>
+                      <div className="flex-1">
+                        <p className="font-medium">{item.name}</p>
+                        <p className="text-xs opacity-75">{item.description}</p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         {!collapsed && (
@@ -95,13 +137,13 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
                 to="/network"
                 className="block p-2 rounded-lg hover:bg-primary-700 text-primary-200 text-sm"
               >
-                👥 People & Network
+                🌐 Network
               </Link>
               <Link
                 to="/dashboard"
                 className="block p-2 rounded-lg hover:bg-primary-700 text-primary-200 text-sm"
               >
-                📊 Dashboard
+                📊 Assistant Panel
               </Link>
               <Link
                 to="/profile"

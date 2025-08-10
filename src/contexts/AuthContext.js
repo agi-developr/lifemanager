@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { authAPI } from '../services/api';
+import { authAPI, userAPI } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const response = await authAPI.register(userData);
-      const { token: newToken, user: userData: newUser } = response.data;
+      const { token: newToken, user: newUser } = response.data;
       
       setToken(newToken);
       setUser(newUser);
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (profileData) => {
     try {
-      const response = await authAPI.updateProfile(profileData);
+      const response = await userAPI.updateProfile(profileData);
       setUser(response.data.user);
       return { success: true };
     } catch (error) {

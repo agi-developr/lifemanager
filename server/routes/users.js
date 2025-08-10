@@ -21,10 +21,10 @@ router.get('/profile', auth, async (req, res) => {
   }
 });
 
-// Update user profile
+// Update user profile (supports avatar as base64 data URI)
 router.put('/profile', auth, async (req, res) => {
   try {
-    const { name, age, location, currentJob, interests, goals } = req.body;
+    const { name, age, location, currentJob, interests, goals, avatar } = req.body;
     
     req.user.profile = {
       ...req.user.profile,
@@ -33,7 +33,8 @@ router.put('/profile', auth, async (req, res) => {
       location: location || req.user.profile.location,
       currentJob: currentJob || req.user.profile.currentJob,
       interests: interests || req.user.profile.interests,
-      goals: goals || req.user.profile.goals
+      goals: goals || req.user.profile.goals,
+      avatar: avatar || req.user.profile.avatar
     };
     
     await req.user.save();

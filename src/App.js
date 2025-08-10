@@ -8,6 +8,12 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Network from './pages/Network';
 import Login from './pages/Login';
+import Workspace from './pages/Workspace';
+import Ideas from './pages/Ideas';
+import Pipeline from './pages/Pipeline';
+import Matches from './pages/Matches';
+import Tests from './pages/Tests';
+import Collaborators from './pages/Collaborators';
 import './index.css';
 
 function AppContent() {
@@ -97,6 +103,12 @@ function AppContent() {
               <div className="h-full overflow-y-auto">
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/workspace" element={<Workspace />} />
+                  <Route path="/ideas" element={<Ideas />} />
+                  <Route path="/pipeline" element={<Pipeline />} />
+                  <Route path="/matches" element={<Matches />} />
+                  <Route path="/tests" element={<Tests />} />
+                  <Route path="/collaborators" element={<Collaborators />} />
                   <Route path="/chat/:module" element={<ChatPage />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />

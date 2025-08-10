@@ -1,21 +1,50 @@
 import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import { userAPI } from '../services/api';
 
 function Profile() {
+  const { user, updateProfile } = useAuth();
   const [profile, setProfile] = useState({
-    name: 'User Name',
-    email: 'user@example.com',
-    age: 25,
-    location: 'San Francisco, CA',
-    currentJob: 'Software Developer',
-    interests: ['Technology', 'Travel', 'Reading']
+    name: user?.profile?.name || 'User Name',
+    email: user?.email || 'user@example.com',
+    age: user?.profile?.age || 25,
+    location: user?.profile?.location || 'San Francisco, CA',
+    currentJob: user?.profile?.currentJob || 'Software Developer',
+    interests: user?.profile?.interests || ['Technology', 'Travel', 'Reading'],
+    avatar: user?.profile?.avatar || ''
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [avatarPreview, setAvatarPreview] = useState(profile.avatar);
+  const [saving, setSaving] = useState(false);
 
-  const handleSave = () => {
-    setIsEditing(false);
-    // Here you would typically save to backend
-    console.log('Profile updated:', profile);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await updateProfile({
+        name: profile.name,
+        age: profile.age,
+        location: profile.location,
+        currentJob: profile.currentJob,
+        interests: profile.interests,
+        avatar: profile.avatar,
+      });
+      setIsEditing(false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result;
+      setProfile({ ...profile, avatar: base64 });
+      setAvatarPreview(base64);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -24,13 +53,22 @@ function Profile() {
       
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <div className="flex items-center space-x-4 mb-6">
-          <div className="w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-2xl font-bold">{profile.name.charAt(0)}</span>
-          </div>
+          {avatarPreview ? (
+            <img src={avatarPreview} alt="Avatar" className="w-20 h-20 rounded-full object-cover border" />
+          ) : (
+            <div className="w-20 h-20 bg-primary-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-2xl font-bold">{profile.name.charAt(0)}</span>
+            </div>
+          )}
           <div>
             <h3 className="text-xl font-semibold">{profile.name}</h3>
             <p className="text-gray-600">{profile.email}</p>
           </div>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
+          <input type="file" accept="image/*" onChange={handleAvatarChange} disabled={!isEditing} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -107,9 +145,10 @@ function Profile() {
             <>
               <button
                 onClick={handleSave}
-                className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
+                disabled={saving}
+                className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
               >
-                Save Changes
+                {saving ? 'Saving...' : 'Save Changes'}
               </button>
               <button
                 onClick={() => setIsEditing(false)}

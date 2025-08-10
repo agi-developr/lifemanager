@@ -3,45 +3,45 @@ import { Link } from 'react-router-dom';
 
 const featuredTools = [
   {
-    title: 'Career Planning',
-    description: 'Set your career path and milestones with AI guidance',
-    icon: '🚀',
-    path: '/chat/career',
+    title: 'Workspace',
+    description: 'Your collaborative home to organize ideas and people',
+    icon: '🧭',
+    path: '/workspace',
     color: 'bg-gradient-to-br from-blue-500 to-blue-600'
   },
   {
-    title: 'Goal Tracker',
-    description: 'Manage and achieve your personal goals systematically',
-    icon: '🎯',
-    path: '/chat/goals',
+    title: 'Ideas',
+    description: 'Capture, compare, and evolve ideas with AI assistance',
+    icon: '💡',
+    path: '/ideas',
     color: 'bg-gradient-to-br from-green-500 to-green-600'
   },
   {
-    title: 'Passion Discovery',
-    description: 'Find what truly excites and motivates you',
-    icon: '🔥',
-    path: '/chat/passions',
+    title: 'Pipeline',
+    description: 'Structured steps from idea → business with AI help',
+    icon: '🛠️',
+    path: '/pipeline',
     color: 'bg-gradient-to-br from-orange-500 to-orange-600'
   },
   {
-    title: 'Skill Development',
-    description: 'Learn new skills tailored to your interests',
-    icon: '📚',
-    path: '/chat/upskill',
+    title: 'Matches',
+    description: 'Cofounder and idea alignment based on your profile',
+    icon: '🤝',
+    path: '/matches',
     color: 'bg-gradient-to-br from-purple-500 to-purple-600'
   },
   {
-    title: 'Financial Planning',
-    description: 'Manage your money and build wealth',
-    icon: '💰',
-    path: '/chat/money',
+    title: 'Tests',
+    description: 'Personality and skills assessment for better matches',
+    icon: '🧪',
+    path: '/tests',
     color: 'bg-gradient-to-br from-yellow-500 to-yellow-600'
   },
   {
-    title: 'Community Connect',
-    description: 'Find and connect with like-minded individuals',
+    title: 'Collaborators',
+    description: 'Manage people, roles, and invites for each idea',
     icon: '👥',
-    path: '/chat/community',
+    path: '/collaborators',
     color: 'bg-gradient-to-br from-pink-500 to-pink-600'
   }
 ];
@@ -52,24 +52,23 @@ function Home() {
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Welcome to <span className="text-primary-600">LifeManager</span>
+          Build with the right people on the right ideas
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Your AI-powered life coach helping you discover passions, build skills, and achieve your goals. 
-          Start a conversation and transform your life today!
+          An AI-assisted collaboration platform for personality tests, skills & passion profiling, cofounder-to-idea alignment, and an idea → business pipeline.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            to="/chat/passions"
+            to="/workspace"
             className="bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
           >
-            Start Your Journey
+            Go to Workspace
           </Link>
           <Link
-            to="/dashboard"
+            to="/pipeline"
             className="border border-primary-600 text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
           >
-            View Dashboard
+            View Pipeline
           </Link>
         </div>
       </div>
@@ -134,22 +133,22 @@ function Home() {
             <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white text-2xl">1</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Start a Conversation</h3>
-            <p className="text-gray-600">Choose a topic and begin chatting with your AI life coach</p>
+            <h3 className="text-xl font-semibold mb-2">Profile & Assess</h3>
+            <p className="text-gray-600">Run personality and skills tests to establish your profile</p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white text-2xl">2</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Get Insights</h3>
-            <p className="text-gray-600">Receive personalized insights and actionable recommendations</p>
+            <h3 className="text-xl font-semibold mb-2">Match & Align</h3>
+            <p className="text-gray-600">Find cofounders and ideas that fit your skills, values, and passions</p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white text-2xl">3</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Track Progress</h3>
-            <p className="text-gray-600">Monitor your growth and celebrate your achievements</p>
+            <h3 className="text-xl font-semibold mb-2">Ship with AI</h3>
+            <p className="text-gray-600">Move ideas through the AI-assisted pipeline to launch</p>
           </div>
         </div>
       </div>
