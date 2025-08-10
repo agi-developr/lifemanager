@@ -1,0 +1,5 @@
+steps:
+- name: gcr.io/cloud-builders/docker
+  args: ['build', '-f', 'Dockerfile.web', '-t', 'us-docker.pkg.dev/bcimarketplace/lifemanager-repo/lifemanager-web:latest', '.']
+images:
+- 'us-docker.pkg.dev/bcimarketplace/lifemanager-repo/lifemanager-web:latest'

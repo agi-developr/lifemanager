@@ -1,0 +1,19 @@
+# Container image to serve the static site with Nginx
+
+FROM nginx:alpine
+
+# Copy static assets into Nginx html root
+COPY index.html /usr/share/nginx/html/index.html
+COPY sidebar.html /usr/share/nginx/html/sidebar.html
+COPY style.css /usr/share/nginx/html/style.css
+COPY script.js /usr/share/nginx/html/script.js
+COPY images/ /usr/share/nginx/html/images/
+COPY assets/ /usr/share/nginx/html/assets/
+COPY *.html /usr/share/nginx/html/
+
+EXPOSE 8080
+
+# Run Nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
+
+
