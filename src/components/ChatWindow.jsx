@@ -10,7 +10,7 @@ function ChatWindow({ module }) {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function ChatWindow({ module }) {
         goals: "Welcome! Let's set and track your goals! 🎯 What's one thing you want to achieve this year?",
         community: "Hello! Let's help you connect with like-minded people! 👥 What communities interest you?",
         business: "Welcome to Business Builder! 🏗️ What's the problem you're solving and for whom?",
-        networking: "Welcome to Networking Coach! 🧩 Who do you want to connect with and why?"
+        networking: "Welcome to Networking Coach! 🧩 Who do you want to connect with and why?",
       };
 
       const welcomeMessage = welcomeMessages[module] || "Hi! I'm your AI life coach. How can I help you today?";
@@ -52,8 +52,8 @@ function ChatWindow({ module }) {
           id: Date.now(),
           sender: 'ai',
           content: welcomeMessage,
-          timestamp: new Date()
-        }
+          timestamp: new Date(),
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -67,10 +67,10 @@ function ChatWindow({ module }) {
       id: Date.now(),
       sender: 'user',
       content: input.trim(),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
@@ -87,10 +87,10 @@ function ChatWindow({ module }) {
         id: Date.now() + 1,
         sender: 'ai',
         content: response.data.messages[response.data.messages.length - 1].content,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
       
@@ -99,59 +99,59 @@ function ChatWindow({ module }) {
         passions: [
           "That's fascinating! What specifically about that excites you? 🤔",
           "I can see your passion shining through! What would you do if money wasn't an issue? 💭",
-          "That's a great insight! How do you feel when you're doing that activity? ✨"
+          "That's a great insight! How do you feel when you're doing that activity? ✨",
         ],
         business: [
-          "Great! Who is your target customer and what top problem are you solving?",
-          "Nice idea. What is the simplest MVP you could ship in a week?",
-          "How would you validate demand with 5 conversations this week?"
+          'Great! Who is your target customer and what top problem are you solving?',
+          'Nice idea. What is the simplest MVP you could ship in a week?',
+          'How would you validate demand with 5 conversations this week?',
         ],
         networking: [
           "What is your networking goal this month (mentor, peers, clients, cofounder)?",
           "Let's craft a 1–2 sentence intro. How would you describe yourself and what you seek?",
-          "Name 2 communities where your people hang out."
+          "Name 2 communities where your people hang out.",
         ],
         strengths: [
           "That's a wonderful strength! How do you think you could leverage that more? 💪",
           "I can see that coming through in your response! What situations bring out this strength? 🌟",
-          "That's definitely a valuable skill! How do you think others benefit from this strength? 🤝"
+          "That's definitely a valuable skill! How do you think others benefit from this strength? 🤝",
         ],
         upskill: [
           "Great choice! What's your current experience level with that skill? 📊",
           "That's a valuable skill to develop! What's motivating you to learn this? 🎯",
-          "Excellent! What resources do you think would work best for your learning style? 📚"
+          "Excellent! What resources do you think would work best for your learning style? 📚",
         ],
         money: [
           "That's a common challenge! What's your biggest financial goal right now? 🎯",
           "I understand that concern! What's your current approach to managing money? 💡",
-          "That's important to address! What would financial freedom look like to you? 🚀"
+          "That's important to address! What would financial freedom look like to you? 🚀",
         ],
         career: [
-          "That sounds exciting! What aspects of that job appeal to you most? 🎯",
+          'That sounds exciting! What aspects of that job appeal to you most? 🎯',
           "Great vision! What skills do you think you'd need to get there? 📚",
-          "That's ambitious! What's the first step you could take toward that goal? 🚀"
+          "That's ambitious! What's the first step you could take toward that goal? 🚀",
         ],
         events: [
           "That's a great interest! What type of events would help you grow in that area? 🌱",
-          "Excellent! What's your preferred way to network and connect? 🤝",
-          "That sounds fun! What would make an event truly valuable for you? ⭐"
+          'Excellent! What\'s your preferred way to network and connect? 🤝',
+          'That sounds fun! What would make an event truly valuable for you? ⭐',
         ],
         goals: [
           "That's a meaningful goal! What's your timeline for achieving it? 📅",
-          "Great ambition! What obstacles do you think you might face? 🚧",
-          "That's inspiring! What's the first small step you could take today? 🎯"
+          'Great ambition! What obstacles do you think you might face? 🚧',
+          "That's inspiring! What's the first small step you could take today? 🎯",
         ],
         community: [
           "That's wonderful! What values are most important to you in a community? 🤝",
           "Great choice! What would you hope to contribute to that community? 💫",
-          "That sounds perfect! What would make you feel truly connected? ❤️"
-        ]
+          "That sounds perfect! What would make you feel truly connected? ❤️",
+        ],
       };
 
       const responses = fallbackResponses[module] || [
         "That's interesting! Tell me more about that.",
         "I'd love to hear more about your thoughts on this.",
-        "That's a great point! What else comes to mind?"
+        "That's a great point! What else comes to mind?",
       ];
 
       const randomResponse = responses[Math.floor(Math.random() * responses.length)];
@@ -160,10 +160,10 @@ function ChatWindow({ module }) {
         id: Date.now() + 1,
         sender: 'ai',
         content: randomResponse,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, aiMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -230,4 +230,6 @@ function ChatWindow({ module }) {
   );
 }
 
-export default ChatWindow; 
+export default ChatWindow;
+
+

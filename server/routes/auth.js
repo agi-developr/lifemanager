@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const { generateToken } = require('../middleware/auth');
+const { auth, generateToken } = require('../middleware/auth');
 
 // Register new user
 router.post('/register', async (req, res) => {
@@ -86,74 +86,46 @@ router.post('/login', async (req, res) => {
 });
 
 // Get current user
-router.get('/me', async (req, res) => {
+router.get('/me', auth, async (req, res) => {
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    
-    if (!token) {
-      return res.status(401).json({ error: 'No token provided' });
-    }
-
-    const jwt = require('jsonwebtoken');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
-    const user = await User.findById(decoded.userId).select('-password');
-    if (!user) {
-      return res.status(401).json({ error: 'User not found' });
-    }
-
     res.json({
       user: {
-        id: user._id,
-        email: user.email,
-        profile: user.profile,
-        insights: user.getInsightsSummary()
+        id: req.user._id,
+        email: req.user.email,
+        profile: req.user.profile,
+        insights: req.user.getInsightsSummary()
       }
     });
   } catch (error) {
     console.error('Get user error:', error);
-    res.status(401).json({ error: 'Invalid token' });
+    res.status(500).json({ error: 'Failed to get user' });
   }
 });
 
 // Update user profile
-router.put('/profile', async (req, res) => {
+router.put('/profile', auth, async (req, res) => {
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    
-    if (!token) {
-      return res.status(401).json({ error: 'No token provided' });
-    }
-
-    const jwt = require('jsonwebtoken');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
-    const user = await User.findById(decoded.userId);
-    if (!user) {
-      return res.status(401).json({ error: 'User not found' });
-    }
-
     const { name, age, location, currentJob, interests, goals } = req.body;
 
     // Update profile
-    user.profile = {
-      ...user.profile,
-      name: name || user.profile.name,
-      age: age || user.profile.age,
-      location: location || user.profile.location,
-      currentJob: currentJob || user.profile.currentJob,
-      interests: interests || user.profile.interests,
-      goals: goals || user.profile.goals
+    req.user.profile = {
+      ...req.user.profile,
+      name: name || req.user.profile.name,
+      age: age || req.user.profile.age,
+      location: location || req.user.profile.location,
+      currentJob: currentJob || req.user.profile.currentJob,
+      interests: interests || req.user.profile.interests,
+      goals: goals || req.user.profile.goals
     };
 
-    await user.save();
+    await req.user.save();
 
     res.json({
       user: {
-        id: user._id,
-        email: user.email,
-        profile: user.profile,
-        insights: user.getInsightsSummary()
+        id: req.user._id,
+        email: req.user.email,
+        profile: req.user.profile,
+        insights: req.user.getInsightsSummary()
       }
     });
   } catch (error) {

@@ -96,6 +96,38 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
+// Pipeline Coach assessments and profile
+userSchema.add({
+  assessments: {
+    personality: {
+      type: {
+        type: String, // e.g., "Innovative Extrovert"
+        trim: true
+      },
+      bigFive: {
+        openness: { type: Number, min: 0, max: 1 },
+        conscientiousness: { type: Number, min: 0, max: 1 },
+        extraversion: { type: Number, min: 0, max: 1 },
+        agreeableness: { type: Number, min: 0, max: 1 },
+        neuroticism: { type: Number, min: 0, max: 1 }
+      }
+    },
+    passions: [{ type: String, trim: true }], // e.g., ["AI", "Sustainability", "EdTech"]
+    skills: [{
+      name: { type: String, trim: true },
+      level: { type: Number, min: 0, max: 10 }
+    }],
+    demographics: {
+      yearsExperience: { type: Number, min: 0, max: 80 },
+      location: { type: String, trim: true },
+      ageRange: { type: String, trim: true }
+    },
+    currentStage: { type: String, trim: true }, // Ideation, Validation, Prototyping, Launch, Scaling
+    currentIdeaDescription: { type: String, trim: true },
+    alignmentScore: { type: Number, min: 0, max: 100 }
+  }
+});
+
 // Hash password before saving
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();

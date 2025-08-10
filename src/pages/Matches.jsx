@@ -14,7 +14,7 @@ function Matches() {
             <div className="bg-white border rounded-lg p-6">
               <h2 className="text-lg font-semibold mb-4">Recommended People</h2>
               <div className="space-y-4">
-                {[1,2,3].map((i) => (
+                {[1, 2, 3].map((i) => (
                   <div key={i} className="flex items-center justify-between border rounded-lg p-4">
                     <div>
                       <div className="font-medium">Alex Founder {i}</div>

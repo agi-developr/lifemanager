@@ -87,6 +87,32 @@ LifeManager has pivoted from an AI life coach to a platform for collaborating, r
 - Chat/AI: `POST /api/chat/session`, `POST /api/chat/message`
 - Users: `GET/PUT /api/users/profile`, `GET /api/users/insights`
 - Insights: `GET /api/insights/analytics`, `GET /api/insights/recommendations`
+- Pipeline Coach: `PUT /api/pipeline/tests`, `GET /api/pipeline/coach`
+
+### Pipeline Coach Examples
+
+1) Save tests/profile
+
+```bash
+curl -X PUT http://localhost:5000/api/pipeline/tests \
+  -H "Authorization: Bearer <TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "personality": {"type": "Innovative Extrovert", "bigFive": {"openness": 0.9, "extraversion": 0.8, "conscientiousness": 0.7}},
+    "passions": ["AI", "Sustainability", "EdTech"],
+    "skills": [{"name": "Coding", "level": 9}, {"name": "UI/UX Design", "level": 7}, {"name": "Marketing", "level": 4}, {"name": "Project Management", "level": 6}, {"name": "Fundraising", "level": 3}],
+    "demographics": {"yearsExperience": 4, "location": "San Francisco", "ageRange": "28-35"},
+    "currentStage": "Ideation",
+    "currentIdeaDescription": "AI-powered app that reduces personal carbon footprint via gamified challenges."
+  }'
+```
+
+2) Get personalized pipeline JSON
+
+```bash
+curl -X GET http://localhost:5000/api/pipeline/coach \
+  -H "Authorization: Bearer <TOKEN>"
+```
 
 ## 🔒 Security
 

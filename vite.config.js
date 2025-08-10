@@ -5,10 +5,8 @@ export default defineConfig({
   plugins: [react()],
   publicDir: 'public',
   esbuild: {
-    // Treat .js files in src/ as JSX so we don't need to rename files
     loader: 'jsx',
-    include: /src\/.*\.js$/,
-    exclude: [],
+    include: /src\/.*\.[jt]sx?$/, // allow JSX in .js within src
   },
   build: {
     rollupOptions: {

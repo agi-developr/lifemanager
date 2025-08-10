@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function Dashboard() {
   const [userData, setUserData] = useState({
     insights: {
       passions: ['Coding', 'Travel', 'Writing'],
       strengths: ['Problem Solving', 'Creativity', 'Leadership'],
-      skills: ['JavaScript', 'Project Management', 'Communication']
+      skills: ['JavaScript', 'Project Management', 'Communication'],
     },
     progress: {
       sessionsCompleted: 12,
       goalsAchieved: 3,
-      lastActive: new Date()
+      lastActive: new Date(),
     },
     goals: [
       { id: 1, title: 'Learn React', progress: 75, category: 'skill' },
       { id: 2, title: 'Save $10,000', progress: 45, category: 'financial' },
-      { id: 3, title: 'Find new job', progress: 30, category: 'career' }
-    ]
+      { id: 3, title: 'Find new job', progress: 30, category: 'career' },
+    ],
   });
 
   return (
@@ -127,4 +127,6 @@ function Dashboard() {
   );
 }
 
-export default Dashboard; 
+export default Dashboard;
+
+

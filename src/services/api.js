@@ -2,7 +2,14 @@ import axios from 'axios';
 
 // Support both Vite and CRA-style env vars
 const viteUrl = typeof import.meta !== 'undefined' ? import.meta.env?.VITE_API_URL : undefined;
-const API_BASE_URL = viteUrl || process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// In production on Vercel (or any static host), prefer env. If missing, fall back to relative "/api"
+// which can be proxied by the hosting platform. In local dev, default to localhost:5000.
+const API_BASE_URL =
+  viteUrl ||
+  process.env.REACT_APP_API_URL ||
+  (typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+    ? '/api'
+    : 'http://localhost:5000/api');
 
 // Create axios instance
 const api = axios.create({
@@ -74,6 +81,12 @@ export const insightsAPI = {
 export const networkAPI = {
   getSuggested: () => api.get('/network/suggested'),
   search: (q) => api.get('/network/search', { params: { q } }),
+};
+
+// Pipeline Coach API
+export const pipelineAPI = {
+  saveTests: (data) => api.put('/pipeline/tests', data),
+  getCoach: () => api.get('/pipeline/coach'),
 };
 
 // Health check

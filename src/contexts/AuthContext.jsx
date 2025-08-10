@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Login failed:', error);
       return { 
         success: false, 
-        error: error.response?.data?.error || 'Login failed' 
+        error: error.response?.data?.error || 'Login failed',
       };
     }
   };
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Registration failed:', error);
       return { 
         success: false, 
-        error: error.response?.data?.error || 'Registration failed' 
+        error: error.response?.data?.error || 'Registration failed',
       };
     }
   };
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Demo login failed:', error);
       return { 
         success: false, 
-        error: error.response?.data?.error || 'Demo login failed' 
+        error: error.response?.data?.error || 'Demo login failed',
       };
     }
   };
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Profile update failed:', error);
       return { 
         success: false, 
-        error: error.response?.data?.error || 'Profile update failed' 
+        error: error.response?.data?.error || 'Profile update failed',
       };
     }
   };
@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }) => {
     demoLogin,
     logout,
     updateProfile,
-    isAuthenticated: !!user
+    isAuthenticated: !!user,
   };
 
   return (
@@ -129,4 +129,6 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-}; 
+};
+
+

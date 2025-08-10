@@ -7,43 +7,43 @@ const featuredTools = [
     description: 'Your collaborative home to organize ideas and people',
     icon: '🧭',
     path: '/workspace',
-    color: 'bg-gradient-to-br from-blue-500 to-blue-600'
+    color: 'bg-gradient-to-br from-blue-500 to-blue-600',
   },
   {
     title: 'Ideas',
     description: 'Capture, compare, and evolve ideas with AI assistance',
     icon: '💡',
     path: '/ideas',
-    color: 'bg-gradient-to-br from-green-500 to-green-600'
+    color: 'bg-gradient-to-br from-green-500 to-green-600',
   },
   {
     title: 'Pipeline',
     description: 'Structured steps from idea → business with AI help',
     icon: '🛠️',
     path: '/pipeline',
-    color: 'bg-gradient-to-br from-orange-500 to-orange-600'
+    color: 'bg-gradient-to-br from-orange-500 to-orange-600',
   },
   {
     title: 'Matches',
     description: 'Cofounder and idea alignment based on your profile',
     icon: '🤝',
     path: '/matches',
-    color: 'bg-gradient-to-br from-purple-500 to-purple-600'
+    color: 'bg-gradient-to-br from-purple-500 to-purple-600',
   },
   {
     title: 'Tests',
     description: 'Personality and skills assessment for better matches',
     icon: '🧪',
     path: '/tests',
-    color: 'bg-gradient-to-br from-yellow-500 to-yellow-600'
+    color: 'bg-gradient-to-br from-yellow-500 to-yellow-600',
   },
   {
     title: 'Collaborators',
     description: 'Manage people, roles, and invites for each idea',
     icon: '👥',
     path: '/collaborators',
-    color: 'bg-gradient-to-br from-pink-500 to-pink-600'
-  }
+    color: 'bg-gradient-to-br from-pink-500 to-pink-600',
+  },
 ];
 
 function Home() {
@@ -156,4 +156,6 @@ function Home() {
   );
 }
 
-export default Home; 
+export default Home;
+
+

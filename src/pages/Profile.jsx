@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { userAPI } from '../services/api';
 
 function Profile() {
   const { user, updateProfile } = useAuth();
@@ -11,7 +10,7 @@ function Profile() {
     location: user?.profile?.location || 'San Francisco, CA',
     currentJob: user?.profile?.currentJob || 'Software Developer',
     interests: user?.profile?.interests || ['Technology', 'Travel', 'Reading'],
-    avatar: user?.profile?.avatar || ''
+    avatar: user?.profile?.avatar || '',
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -77,7 +76,10 @@ function Profile() {
             <input
               type="text"
               value={profile.name}
-              onChange={(e) => setProfile({...profile, name: e.target.value})}
+              onChange={(e) => setProfile({
+                ...profile,
+                name: e.target.value,
+              })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-50"
             />
@@ -88,7 +90,10 @@ function Profile() {
             <input
               type="email"
               value={profile.email}
-              onChange={(e) => setProfile({...profile, email: e.target.value})}
+              onChange={(e) => setProfile({
+                ...profile,
+                email: e.target.value,
+              })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-50"
             />
@@ -99,7 +104,10 @@ function Profile() {
             <input
               type="number"
               value={profile.age}
-              onChange={(e) => setProfile({...profile, age: parseInt(e.target.value)})}
+              onChange={(e) => setProfile({
+                ...profile,
+                age: parseInt(e.target.value),
+              })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-50"
             />
@@ -110,7 +118,10 @@ function Profile() {
             <input
               type="text"
               value={profile.location}
-              onChange={(e) => setProfile({...profile, location: e.target.value})}
+              onChange={(e) => setProfile({
+                ...profile,
+                location: e.target.value,
+              })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-50"
             />
@@ -121,7 +132,10 @@ function Profile() {
             <input
               type="text"
               value={profile.currentJob}
-              onChange={(e) => setProfile({...profile, currentJob: e.target.value})}
+              onChange={(e) => setProfile({
+                ...profile,
+                currentJob: e.target.value,
+              })}
               disabled={!isEditing}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-50"
             />
@@ -132,7 +146,10 @@ function Profile() {
             <input
               type="text"
               value={profile.interests.join(', ')}
-              onChange={(e) => setProfile({...profile, interests: e.target.value.split(', ')})}
+              onChange={(e) => setProfile({
+                ...profile,
+                interests: e.target.value.split(', '),
+              })}
               disabled={!isEditing}
               placeholder="Technology, Travel, Reading"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-50"
@@ -171,4 +188,6 @@ function Profile() {
   );
 }
 
-export default Profile; 
+export default Profile;
+
+

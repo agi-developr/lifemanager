@@ -12,7 +12,7 @@ app.use(helmet());
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true
 }));
 
@@ -42,6 +42,7 @@ app.use('/api/chat', require('./routes/chat'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/insights', require('./routes/insights'));
 app.use('/api/network', require('./routes/network'));
+app.use('/api/pipeline', require('./routes/pipeline'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

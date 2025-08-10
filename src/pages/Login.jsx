@@ -13,7 +13,7 @@ function Login() {
     age: '',
     location: '',
     currentJob: '',
-    interests: ''
+    interests: '',
   });
 
   const handleSubmit = async (e) => {
@@ -26,7 +26,7 @@ function Login() {
       if (isLogin) {
         result = await login({
           email: formData.email,
-          password: formData.password
+          password: formData.password,
         });
       } else {
         result = await register({
@@ -36,7 +36,7 @@ function Login() {
           age: parseInt(formData.age) || undefined,
           location: formData.location,
           currentJob: formData.currentJob,
-          interests: formData.interests.split(',').map(i => i.trim()).filter(Boolean)
+          interests: formData.interests.split(',').map((i) => i.trim()).filter(Boolean),
         });
       }
 
@@ -69,7 +69,7 @@ function Login() {
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -158,7 +158,7 @@ function Login() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text sm font-medium text-gray-700 mb-1">
                       Location
                     </label>
                     <input
@@ -243,4 +243,6 @@ function Login() {
   );
 }
 
-export default Login; 
+export default Login;
+
+

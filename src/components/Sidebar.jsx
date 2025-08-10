@@ -167,4 +167,6 @@ function Sidebar({ collapsed, onToggle, user, onLogout }) {
   );
 }
 
-export default Sidebar; 
+export default Sidebar;
+
+

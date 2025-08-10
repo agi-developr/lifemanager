@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { pipelineAPI } from '../services/api';
 
 const stages = [
   { key: 'discovery', title: 'Discovery', items: ['Problem interviews', 'ICP definition', 'Competitive scan'] },
@@ -9,6 +10,22 @@ const stages = [
 ];
 
 function Pipeline() {
+  const [coach, setCoach] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const loadCoach = async () => {
+    try {
+      setLoading(true);
+      const res = await pipelineAPI.getCoach();
+      setCoach(res.data);
+    } catch (e) {
+      console.error(e);
+      alert('Failed to load Pipeline Coach. Ensure you saved tests and are logged in.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="h-full overflow-y-auto">
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -29,12 +46,29 @@ function Pipeline() {
                   </li>
                 ))}
               </ul>
-              <button className="mt-3 w-full p-2 rounded-md border hover:bg-gray-50 text-sm">
-                Ask AI for next step
+               <button onClick={loadCoach} disabled={loading} className="mt-3 w-full p-2 rounded-md border hover:bg-gray-50 text-sm">
+                {loading ? 'Loading…' : 'Ask AI for next step'}
               </button>
             </div>
           ))}
         </div>
+
+        {coach && (
+          <div className="mt-6 bg-white border rounded-lg p-6">
+            <div className="font-semibold mb-2">Pipeline Coach</div>
+            <div className="text-sm text-gray-800 mb-3">{coach.summary}</div>
+            <ol className="list-decimal ml-6 space-y-2 text-sm">
+              {coach.steps?.map((s) => (
+                <li key={s.step_number}>
+                  <span className="font-medium">{s.action}</span> — <span className="text-gray-700">{s.tips}</span>
+                </li>
+              ))}
+            </ol>
+            {coach.next_recommendation && (
+              <div className="mt-3 text-sm"><span className="font-medium">Next:</span> {coach.next_recommendation}</div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

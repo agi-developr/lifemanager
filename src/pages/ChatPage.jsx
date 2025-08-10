@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ChatWindow from '../components/ChatWindow';
 
@@ -10,71 +10,71 @@ function ChatPage() {
     const moduleInfo = {
       passions: {
         title: 'Passion Discovery',
-        description: 'Let\'s explore what truly excites and motivates you',
+        description: "Let's explore what truly excites and motivates you",
         icon: '🔥',
-        color: 'from-orange-500 to-red-500'
+        color: 'from-orange-500 to-red-500',
       },
       strengths: {
         title: 'Strength Identification',
         description: 'Discover your unique abilities and talents',
         icon: '💪',
-        color: 'from-blue-500 to-purple-500'
+        color: 'from-blue-500 to-purple-500',
       },
       upskill: {
         title: 'Skill Development',
         description: 'Learn new skills tailored to your interests',
         icon: '📚',
-        color: 'from-green-500 to-teal-500'
+        color: 'from-green-500 to-teal-500',
       },
       money: {
         title: 'Financial Planning',
         description: 'Manage your money and build wealth',
         icon: '💰',
-        color: 'from-yellow-500 to-orange-500'
+        color: 'from-yellow-500 to-orange-500',
       },
       career: {
         title: 'Career Planning',
         description: 'Plan your career path and achieve your goals',
         icon: '🚀',
-        color: 'from-indigo-500 to-purple-500'
+        color: 'from-indigo-500 to-purple-500',
       },
       events: {
         title: 'Event Discovery',
         description: 'Find relevant events and networking opportunities',
         icon: '📅',
-        color: 'from-pink-500 to-rose-500'
+        color: 'from-pink-500 to-rose-500',
       },
       goals: {
         title: 'Goal Setting',
         description: 'Set and track your personal and professional goals',
         icon: '🎯',
-        color: 'from-emerald-500 to-green-500'
+        color: 'from-emerald-500 to-green-500',
       },
       community: {
         title: 'Community Connect',
         description: 'Connect with like-minded individuals',
         icon: '👥',
-        color: 'from-cyan-500 to-blue-500'
+        color: 'from-cyan-500 to-blue-500',
       },
       business: {
         title: 'Business Builder',
         description: 'Ideate, validate, and launch your business',
         icon: '🏗️',
-        color: 'from-amber-600 to-orange-600'
+        color: 'from-amber-600 to-orange-600',
       },
       networking: {
         title: 'Networking Coach',
         description: 'Grow authentic relationships that help you thrive',
         icon: '🧩',
-        color: 'from-sky-500 to-indigo-500'
-      }
+        color: 'from-sky-500 to-indigo-500',
+      },
     };
     
     return moduleInfo[moduleName] || {
       title: 'Life Coaching',
       description: 'Your AI life coach is here to help',
       icon: '🤖',
-      color: 'from-gray-500 to-gray-600'
+      color: 'from-gray-500 to-gray-600',
     };
   };
 
@@ -101,4 +101,6 @@ function ChatPage() {
   );
 }
 
-export default ChatPage; 
+export default ChatPage;
+
+
